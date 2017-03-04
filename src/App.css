@@ -1,0 +1,7 @@
+
+.ReacivlyApp-banner {
+  position: absolute;
+  top: 0;
+  font-size: 2rem;
+  z-index: 999999;
+}
