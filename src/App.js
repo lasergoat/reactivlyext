@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import get from 'lodash/get';
+import sample from 'lodash/sample';
 import io from 'socket.io-client';
 
 const socket = io(`http://localhost:3001`)
@@ -11,6 +12,18 @@ import {
   getRequest, 
   originUrl
 } from './http-util';
+
+// you'll see a lot of long class names, it's because
+// this code will live side by side with whatever
+// webpage the user activates it on, so it's safer to be specific
+const paths = [
+  'ReacivlyApp-path-1',
+  'ReacivlyApp-path-2',
+  'ReacivlyApp-path-3',
+  'ReacivlyApp-path-4',
+  'ReacivlyApp-path-5',
+  'ReacivlyApp-path-6',
+];
 
 // we have to use inline styles since 
 // we aren't importing css
@@ -56,7 +69,8 @@ class App extends Component {
     this.setState({
       interactions: [...interactions, {
         id: id,
-        value: emoji
+        value: emoji,
+        path: sample(paths),
       }
     ]});
 
@@ -87,7 +101,7 @@ class App extends Component {
 
     return interactions.map((interaction, i) => (
       <span
-        className="ReacivlyApp-interaction"
+        className={`ReacivlyApp-interaction ${interaction.path}`}
         key={`emoji-${interaction.id}`}
       >
         {interaction.value}
