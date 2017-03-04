@@ -112,9 +112,11 @@ class App extends Component {
     return (
       <div className="ReacivlyApp-wrapper">
         <div className="ReacivlyApp-banner">
-          React At:
+          Visit
           {' '}
           {process.env.REACT_APP_SPA_URL}
+          {' '}
+          to react!
         </div>
         {this.renderInteractions()}
       </div>

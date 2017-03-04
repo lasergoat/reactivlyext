@@ -43,33 +43,33 @@ on top of that, there are multiples chosen randomly by class
 */
 
 .ReacivlyApp-path-1 {
-  animation: Path-1 3s linear forwards,
+  animation: Path-1 4s linear forwards,
     Osc-1 1.3s ease alternate infinite;
 }
 
 .ReacivlyApp-path-2 {
-  animation: Path-2 3s linear forwards,
-    Osc-2 1.3s ease alternate infinite;
+  animation: Path-2 4.25s linear forwards,
+    Osc-2 1.7s ease alternate infinite;
 }
 
 .ReacivlyApp-path-3 {
-  animation: Path-3 3s linear forwards,
+  animation: Path-3 5.25s linear forwards,
     Osc-3 1.3s ease alternate infinite;
 }
 
 .ReacivlyApp-path-4 {
-  animation: Path-4 3s linear forwards,
-    Osc-4 1.3s ease alternate infinite;
+  animation: Path-4 4s linear forwards,
+    Osc-4 1.5s ease alternate infinite;
 }
 
 .ReacivlyApp-path-5 {
-  animation: Path-5 3s linear forwards,
+  animation: Path-5 3.5s linear forwards,
     Osc-2 1.3s ease alternate infinite;
 }
 
 .ReacivlyApp-path-6 {
-  animation: Path-6 3s linear forwards,
-    Osc-3 1.3s ease alternate infinite;
+  animation: Path-6 4.5s linear forwards,
+    Osc-3 2s ease alternate infinite;
 }
 
 @keyframes Path-1 {
