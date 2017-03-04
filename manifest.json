@@ -5,11 +5,11 @@
   "version": "0.0.1",
   "manifest_version": 2,
   "icons": {
-    "256": "public/logo_256.png"
+    "256": "logo_256.png"
   },
   "browser_action": {
     "default_icon": {
-      "256": "images/logo_256.png"
+      "256": "logo_256.png"
     }
   },
   "options_page" : "index.html",
@@ -20,8 +20,11 @@
     "*://reactivly.app/*",
     "*://fonts.googleapis.com/*"
   ],
-  "background":{
-    "scripts": ["background.js"]
-  },
-  "offline_enabled": false
+  "content_scripts": [
+    {
+      "matches": ["http://localhost/*"],
+      "css": ["static/css/CSSFILENAME"],
+      "js": ["static/js/JSFILENAME"]
+    }
+  ]
 }
