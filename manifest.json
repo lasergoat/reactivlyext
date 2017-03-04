@@ -23,8 +23,8 @@
   "content_scripts": [
     {
       "matches": ["http://localhost/*"],
-      "css": ["static/css/CSSFILENAME"],
-      "js": ["static/js/JSFILENAME"]
+      "css": ["static/css/main.css"],
+      "js": ["static/js/main.js"]
     }
   ]
 }
