@@ -28,6 +28,7 @@
 
 .ReacivlyApp-interaction {
   font-size: 2rem;
+  z-index: 99999999;
   opacity: .8;
   position: absolute;
   animation: Move-across 3s ease-out forwards;
