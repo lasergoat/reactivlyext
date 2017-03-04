@@ -15,6 +15,13 @@ import {
 // we have to use inline styles since 
 // we aren't importing css
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      interactions: [],
+      questions: [],
+    };
+  }
   componentWillMount() {
     console.log('mounted-reactiv.ly');
 
@@ -28,7 +35,7 @@ class App extends Component {
     });
 
     // if we get an emoji - show it
-    socket.on("emoji", (data) => {
+    socket.on("R:App\\Events\\Interaction", (data) => {
       this.pushInteraction(data);
     });
 
@@ -38,18 +45,64 @@ class App extends Component {
     });
   }
   pushInteraction(data) {
+    const {
+      interactions
+    } = this.state;
+
     console.log(data);
+    const emoji = get(data, 'text');
+    const id = Math.random();
+
+    this.setState({
+      interactions: [...interactions, {
+        id: id,
+        value: emoji
+      }
+    ]});
+
+    // after 5 seconds remove the interaction from the state
+    setTimeout(() => {
+      // remove id from state.interactions
+      this.setState({
+        interactions: this.state.interactions.filter((obj) => obj.id !== id)
+      });
+    }, 5000);
   }
   pushQuestion(data) {
+    const {
+      questions
+    } = this.state;
+
     console.log(data);
+    const question = get(data, 'question');
+
+    this.setState({
+      questions: [...questions, question]
+    });
+  }
+  renderInteractions() {
+    const {
+      interactions
+    } = this.state;
+
+    return interactions.map((interaction, i) => (
+      <span
+        className="ReacivlyApp-interaction"
+        key={`emoji-${interaction.id}`}
+      >
+        {interaction.value}
+      </span>
+    ));
   }
   render() {
     return (
       <div className="ReacivlyApp-wrapper">
         <div className="ReacivlyApp-banner">
-          React to this presentation at: 
+          React At:
+          {' '}
           {process.env.REACT_APP_SPA_URL}
         </div>
+        {this.renderInteractions()}
       </div>
     );
   }
