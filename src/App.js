@@ -41,7 +41,7 @@ class App extends Component {
 
     // first thing to do when mounted is send current url to API
     const url = originUrl();
-    getRequest(`${process.env.REACT_APP_API_URL}?name=Daniel&url=${url}`)
+    getRequest(`${process.env.REACT_APP_API_URL}begin?name=Daniel&url=${url}`)
       .catch((err) => console.error(err))
 
     socket.on('event', (data) => {
@@ -49,7 +49,7 @@ class App extends Component {
     });
 
     // if we get an emoji - show it
-    socket.on("R:App\\Events\\Interaction", (data) => {
+    socket.on("R:App\\Events\\Interact", (data) => {
       this.pushInteraction(data);
     });
 
@@ -65,7 +65,7 @@ class App extends Component {
       interactions
     } = this.state;
 
-    const emoji = get(data, 'text');
+    const emoji = get(data, 'data.emoji');
 
     // make a crappy id to keep track 
     // of this in the array
@@ -93,7 +93,7 @@ class App extends Component {
       questions
     } = this.state;
 
-    const question = get(data, 'question');
+    const question = get(data, 'data.question');
 
     // make a crappy id to keep track 
     // of this in the array just like emojis above ^^^
