@@ -7,6 +7,7 @@ import io from 'socket.io-client';
 const socket = io(`http://localhost:3001`)
 
 import './App.css';
+import './Interactions.css';
 
 import {
   getRequest, 
@@ -54,16 +55,20 @@ class App extends Component {
 
     // if we get an question - show it
     socket.on("R:App\\Events\\Question", (data) => {
+      console.log(data);
       this.pushQuestion(data);
     });
   }
+
   pushInteraction(data) {
     const {
       interactions
     } = this.state;
 
-    console.log(data);
     const emoji = get(data, 'text');
+
+    // make a crappy id to keep track 
+    // of this in the array
     const id = Math.random();
 
     this.setState({
@@ -82,18 +87,35 @@ class App extends Component {
       });
     }, 5000);
   }
+
   pushQuestion(data) {
     const {
       questions
     } = this.state;
 
-    console.log(data);
     const question = get(data, 'question');
 
+    // make a crappy id to keep track 
+    // of this in the array just like emojis above ^^^
+    const id = Math.random();
+
     this.setState({
-      questions: [...questions, question]
-    });
+      questions: [...questions, {
+        id: id,
+        value: question
+      }
+    ]});
+
+    // after 5 seconds remove the interaction from the state
+    // after 12 seconds
+    setTimeout(() => {
+      // remove id from state.interactions
+      this.setState({
+        questions: this.state.questions.filter((obj) => obj.id !== id)
+      });
+    }, 20000);
   }
+
   renderInteractions() {
     const {
       interactions
@@ -108,6 +130,33 @@ class App extends Component {
       </span>
     ));
   }
+
+  renderQuestions() {
+    const {
+      questions
+    } = this.state;
+
+    if (!get(questions, 'length')) {
+      return null;
+    }
+
+    return (
+      <div className="ReacivlyApp-questions-wrapper">
+        <div className="ReacivlyApp-questions">{
+          questions.map((question, i) => (
+            <span
+              className="ReacivlyApp-question"
+              key={`question-${question.id}`}
+            >
+              {question.value}
+            </span>
+          ))
+        }</div>
+      </div>
+    );
+  }
+
+  // the {' '} is react's silly way of rendering a space
   render() {
     return (
       <div className="ReacivlyApp-wrapper">
@@ -119,6 +168,7 @@ class App extends Component {
           to react!
         </div>
         {this.renderInteractions()}
+        {this.renderQuestions()}
       </div>
     );
   }
