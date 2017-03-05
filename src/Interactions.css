@@ -144,7 +144,7 @@ on top of that, there are multiples chosen randomly by class
   font-size: 1.5rem;
   height: 2rem;
   width: 100%;
-  z-index: 999999;
+  z-index: 99999999;
   text-align: left;
   font-weight: bold;
   color: #9B0C72;
@@ -157,6 +157,7 @@ on top of that, there are multiples chosen randomly by class
 
 .ReacivlyApp-questions {
   white-space: nowrap;
+  z-index: 99999999;
   animation: Slide-across 12s linear infinite;  
 }
 

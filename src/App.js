@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import sample from 'lodash/sample';
 import io from 'socket.io-client';
 
-const socket = io(`http://localhost:3001`)
+const socket = io(process.env.REACT_APP_SOCK_URL || `http://localhost:3001`)
 
 import './App.css';
 import './Interactions.css';
