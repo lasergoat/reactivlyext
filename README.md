@@ -1,3 +1,34 @@
+
+![reactivly-logo](https://cloud.githubusercontent.com/assets/15964/23580177/75dfe62e-00ca-11e7-96a2-db29c87529ab.png)
+
+-----
+
+NOTES:
+====
+
+
+This is the Reactivly Chrome Extension. It gets messages from the [PHP api here](https://github.com/lasergoat/reactivly) and displays emojis onto the presenter's screen. It injects a react app into the browser.
+
+-------
+
+-------
+
+-------
+
+-------
+
+-------
+
+-------
+
+-------
+
+-------
+
+-------
+
+BORING STUFF BELOW
+====
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
