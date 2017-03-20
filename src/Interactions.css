@@ -67,7 +67,7 @@ on top of that, there are multiples chosen randomly by class
 
 @keyframes Path-5 {
   from { top: 90vh; left: 0vh; }
-  to { top: 0vh; left: 90vw; }
+  to { top: 0vh; left: 100vw; }
 }
 
 @keyframes Path-6 {

@@ -41,31 +41,36 @@ class App extends Component {
 
     // first thing to do when mounted is send current url to API
     const url = originUrl();
-    getRequest(`${process.env.REACT_APP_API_URL}begin?name=Daniel&url=${url}`)
-      .catch((err) => console.error(err))
+    // getRequest(`${process.env.REACT_APP_API_URL}begin?name=Daniel&url=${url}`)
+    //   .catch((err) => console.error(err))
 
-    socket.on('event', (data) => {
-      console.log(data);
+    socket.on('connect', (sock) => {
+      console.log('connected');
+
+      socket.emit('presenter', {
+        url,
+        room: 'dog',
+      });
     });
 
     // if we get an emoji - show it
-    socket.on("R:App\\Events\\Interact", (data) => {
+    socket.on("react", (data) => {
       this.pushInteraction(data);
     });
 
     // if we get an question - show it
-    socket.on("R:App\\Events\\Question", (data) => {
-      console.log(data);
+    socket.on("question", (data) => {
       this.pushQuestion(data);
     });
   }
 
   pushInteraction(data) {
+    console.log(data);
     const {
       interactions
     } = this.state;
 
-    const emoji = get(data, 'data.emoji');
+    const emoji = get(data, 'emoji');
 
     // make a crappy id to keep track 
     // of this in the array
@@ -85,7 +90,7 @@ class App extends Component {
       this.setState({
         interactions: this.state.interactions.filter((obj) => obj.id !== id)
       });
-    }, 5000);
+    }, 8000);
   }
 
   pushQuestion(data) {
@@ -93,7 +98,7 @@ class App extends Component {
       questions
     } = this.state;
 
-    const question = get(data, 'data.question');
+    const question = get(data, 'question');
 
     // make a crappy id to keep track 
     // of this in the array just like emojis above ^^^
@@ -113,7 +118,7 @@ class App extends Component {
       this.setState({
         questions: this.state.questions.filter((obj) => obj.id !== id)
       });
-    }, 20000);
+    }, 30000);
   }
 
   renderInteractions() {
