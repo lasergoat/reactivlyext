@@ -32,16 +32,32 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      room: null,
       interactions: [],
       questions: [],
     };
+    window.addEventListener("beforeunload", () => {
+      const {
+        room
+      } = this.state;
+
+      if (room) {
+        socket.emit('endpresentation', {
+          room,
+        });
+      }
+
+      return true;
+    });
   }
+
   componentWillMount() {
     console.log('mounted-reactiv.ly');
 
     // first thing to do when mounted is send current url to API
     const url = originUrl();
-    // getRequest(`${process.env.REACT_APP_API_URL}begin?name=Daniel&url=${url}`)
+    // getRequest(`${process.env.REACT_APP_API_URL}/room`)
+    //   .then((data) => console.log(data))
     //   .catch((err) => console.error(err))
 
     socket.on('connect', (sock) => {
@@ -49,8 +65,12 @@ class App extends Component {
 
       socket.emit('presenter', {
         url,
-        room: 'dog',
       });
+
+      socket.on('assignroom', ({ room }) => {
+        this.setState({ room });
+      });
+
     });
 
     // if we get an emoji - show it
@@ -163,12 +183,17 @@ class App extends Component {
 
   // the {' '} is react's silly way of rendering a space
   render() {
+    const {
+      room
+    } = this.state;
+
     return (
       <div className="ReacivlyApp-wrapper">
         <div className="ReacivlyApp-banner">
           Visit
           {' '}
           {process.env.REACT_APP_SPA_URL}
+          /{room}
           {' '}
           to react!
         </div>
